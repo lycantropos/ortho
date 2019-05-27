@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  ortho-pypy:
+    build:
+      context: .
+      args:
+      - PYTHON_IMAGE=${PYPY_IMAGE_NAME}
+      - PYTHON_IMAGE_VERSION=${PYPY_IMAGE_VERSION}
+    image: lycantropos/ortho-pypy:0.0.0
+    volumes:
+      - ./ortho/:/opt/ortho/ortho/
+      - ./tests/:/opt/ortho/tests/
+      - ./README.md:/opt/ortho/README.md
+      - ./setup.py:/opt/ortho/setup.py
+      - ./setup.cfg:/opt/ortho/setup.cfg
+    entrypoint: pypy3
+    command: setup.py test
